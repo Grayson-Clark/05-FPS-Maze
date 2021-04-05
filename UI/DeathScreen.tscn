@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/DeathScreen.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YouDied" type="Label" parent="."]
+margin_left = 278.371
+margin_top = 83.0622
+margin_right = 354.04
+margin_bottom = 106.062
+rect_scale = Vector2( 5, 5 )
+text = "You Died!"
+align = 1
+valign = 1
+
+[node name="PlayAgain" type="Button" parent="."]
+margin_left = 384.585
+margin_top = 259.568
+margin_right = 467.585
+margin_bottom = 279.568
+rect_scale = Vector2( 2, 2 )
+text = "Play Again?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 425.265
+margin_top = 371.843
+margin_right = 465.265
+margin_bottom = 391.843
+rect_scale = Vector2( 2, 2 )
+text = "Quit"
+[connection signal="pressed" from="PlayAgain" to="." method="_on_PlayAgain_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

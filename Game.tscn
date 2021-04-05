@@ -1,0 +1,247 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/shotgun.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://UI/InGameMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/asphalt_02_diff_1k.jpg" type="Texture" id=4]
+[ext_resource path="res://Assets/asphalt_02_nor_1k.jpg" type="Texture" id=5]
+[ext_resource path="res://Assets/asphalt_02_ao_1k.jpg" type="Texture" id=6]
+[ext_resource path="res://GameAssets/Wall.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/3d text.tscn" type="PackedScene" id=8]
+[ext_resource path="res://GameAssets/Key.tscn" type="PackedScene" id=9]
+[ext_resource path="res://GameAssets/Enemy.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Game.gd" type="Script" id=11]
+[ext_resource path="res://GameAssets/AudioStreamPlayer3D.gd" type="Script" id=12]
+[ext_resource path="res://Assets/haunted_maze.ogg" type="AudioStream" id=13]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 4 )
+normal_enabled = true
+normal_scale = 16.0
+normal_texture = ExtResource( 5 )
+ao_enabled = true
+ao_light_affect = 0.24
+ao_texture = ExtResource( 6 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+uv1_scale = Vector3( 20, 20, 1 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -1.00542, 0.00546448, -1.00546, -1.00542, 0.00546448, 1.00546, 1.00546, 0.00546448, -1.00546, 1.00546, 0.00546448, 1.00546 )
+
+[sub_resource type="CapsuleShape" id=4]
+radius = 0.5
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.4, 0.1, 0.4 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 2.71139, 3.09446, 1.13709 )
+
+[node name="Game" type="Spatial"]
+script = ExtResource( 11 )
+
+[node name="Ground" type="StaticBody" parent="."]
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+transform = Transform( 10, 0, 0, 0, 0.2, 0, 0, 0, 10, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="Player" type="KinematicBody" parent="." groups=[
+"player",
+]]
+script = ExtResource( 1 )
+
+[node name="Area" type="Area" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.1, 0 )
+
+[node name="Body" type="CollisionShape" parent="Player/Area"]
+shape = SubResource( 4 )
+
+[node name="Feet" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+shape = SubResource( 5 )
+
+[node name="Pivot" type="Spatial" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+
+[node name="Camera" type="Camera" parent="Player/Pivot"]
+current = true
+
+[node name="Gun" type="MeshInstance" parent="Player/Pivot"]
+transform = Transform( -8, 2.60673e-06, 0, 2.60673e-06, 8, 2.60673e-06, 8.49381e-13, 2.60673e-06, -8, 0.153324, -0.138926, -0.287887 )
+visible = false
+mesh = ExtResource( 2 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+material/13 = null
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+material/19 = null
+material/20 = null
+material/21 = null
+material/22 = null
+material/23 = null
+material/24 = null
+material/25 = null
+material/26 = null
+material/27 = null
+material/28 = null
+material/29 = null
+material/30 = null
+material/31 = null
+material/32 = null
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Menu" parent="UI" instance=ExtResource( 3 )]
+visible = false
+
+[node name="Walls" type="Spatial" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.947378, 0, 0.320117, 0, 0.6, 0, -0.320117, 0, 0.947378, -0.228245, 3.04629, -4.91791 )
+
+[node name="Wall5" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 0.6, 0, -1, 0, -1.62921e-07, 4.71501, 3.04629, -11.4964 )
+
+[node name="Wall6" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.496322, 0, 0.868138, 0, 0.6, 0, -0.868138, 0, 0.496322, 7.21499, 3.04629, -18.1254 )
+
+[node name="Wall7" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.53851, 0, 0.868138, 0, 0.6, 0, -0.94193, 0, 0.496322, 11.7116, 3.04629, -16.9407 )
+
+[node name="Wall8" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.0209772, 0, 0.99978, 0, 0.6, 0, -0.99978, 0, 0.0209772, 10.0132, 3.04629, -27.3741 )
+
+[node name="Wall9" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.0209772, 0, 0.99978, 0, 0.6, 0, -0.99978, 0, 0.0209772, 14.4289, 3.04629, -32.6996 )
+
+[node name="Wall10" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 3.967, 0, 0, 0, 0.6, 0, 0, 0, 1, -5.04898, 3.04629, -37.3187 )
+
+[node name="Wall11" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.602, 0, 0, 0, 0.6, 0, 0, 0, 1, 6.95096, 3.04629, -32.1623 )
+
+[node name="Wall12" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.558177, 0, -0.986432, 0, 0.6, 0, 3.35387, 0, 0.16417, -21.1199, 3.04629, -20.6265 )
+
+[node name="Wall2" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.907895, 0, -0.419199, 0, 0.6, 0, 0.419199, 0, 0.907895, -0.587553, 3.04629, 4.58016 )
+
+[node name="Wall3" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( -9.77524e-08, 0, -1, 0, 0.6, 0, 0.6, 0, -1.62921e-07, -5.02539, 3.03811, -0.393565 )
+
+[node name="Wall4" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( -6.25941e-07, 0, -1, 0, 0.6, 0, 3.842, 0, -1.62921e-07, 8.81536, 3.03811, 6.78467 )
+
+[node name="Wall19" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 1.017, 0, 0, 0, 0.6, 0, 0, 0, 1, 3.66081, 3.03811, 25.914 )
+
+[node name="Wall21" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( -1.6569e-07, 0, 1, 0, 0.6, 0, -1.017, 0, -1.62921e-07, -1.38598, 3.03811, 21.1068 )
+
+[node name="Wall22" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( -3.91336e-07, 0, 1, 0, 0.6, 0, -2.402, 0, -1.62921e-07, -6.96168, 3.03811, 21.1068 )
+
+[node name="Wall23" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.905097, 0, -0.707107, 0, 0.6, 0, 0.905097, 0, 0.707107, 13.7037, 3.03811, 29.8919 )
+
+[node name="Wall24" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.905097, 0, 0.707107, 0, 0.6, 0, -0.905097, 0, 0.707107, 24.6546, 3.03811, 14.014 )
+
+[node name="Wall25" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( -8.69345e-07, 0, 1, 0, 0.6, 0, -5.336, 0, -1.62921e-07, 40.0077, 3.03811, 13.2449 )
+
+[node name="Wall20" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 7.465, 0, 0, 0, 0.6, 0, 0, 0, 1, 3.66081, 3.03811, 39.7863 )
+
+[node name="Wall13" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( -3.7765e-07, 0, -1, 0, 0.6, 0, 2.318, 0, -1.62921e-07, 29.0062, 3.03811, -1.62289 )
+
+[node name="Wall14" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.748826, 0, -0.707107, 0, 0.6, 0, 0.748826, 0, 0.707107, 25.3124, 3.03811, -17.1285 )
+
+[node name="Wall15" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 0.748826, 0, -0.707107, 0, 0.6, 0, 0.748826, 0, 0.707107, 18.3626, 3.03811, -33.8578 )
+
+[node name="Wall16" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( -2.85274e-07, 0, 1, 0, 0.6, 0, -1.751, 0, -1.62921e-07, 28.8851, 3.03811, -21.9941 )
+
+[node name="Wall18" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 1.568, 0, 0, 0, 0.6, 0, 0, 0, 1, 36.7752, 3.03811, -12.5989 )
+
+[node name="Wall26" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( -7.17666e-07, 0, 1, 0, 0.6, 0, -4.405, 0, -1.62921e-07, -18.3668, 3.03811, 17.8167 )
+
+[node name="Wall17" parent="Walls" instance=ExtResource( 7 )]
+transform = Transform( 2.143, 0, 0, 0, 0.6, 0, 0, 0, 1, 24.4915, 3.03811, -37.2843 )
+
+[node name="Instructions" parent="." instance=ExtResource( 8 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 7.50523, 1.18453, 1.93097 )
+
+[node name="Door" parent="." instance=ExtResource( 8 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -4.48888, 0.426294, -0.30609 )
+
+[node name="Area" type="Area" parent="Door"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Door/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78814e-07, 0, 0.795787 )
+shape = SubResource( 6 )
+
+[node name="Key" parent="." instance=ExtResource( 9 )]
+transform = Transform( -0.0131203, -0.459224, -0.197334, 0.499415, -0.00402664, -0.0238344, 0.0203014, -0.197729, 0.458793, 37.477, 2.79143, 37.548 )
+
+[node name="Enemies" type="Spatial" parent="."]
+
+[node name="EnemyBody" parent="Enemies" instance=ExtResource( 10 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 20.6438, 0.671517, 0 )
+
+[node name="EnemyBody6" parent="Enemies" instance=ExtResource( 10 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 26.8488, 0.671517, 26.4074 )
+
+[node name="EnemyBody5" parent="Enemies" instance=ExtResource( 10 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 7.60379, 0.671517, 37.1174 )
+
+[node name="EnemyBody2" parent="Enemies" instance=ExtResource( 10 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.264851, 0.671517, -28.597 )
+
+[node name="EnemyBody7" parent="Enemies" instance=ExtResource( 10 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -14.7004, 0.671517, 28.9594 )
+
+[node name="EnemyBody3" parent="Enemies" instance=ExtResource( 10 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -12.8584, 0.671517, -31.8854 )
+
+[node name="EnemyBody4" parent="Enemies" instance=ExtResource( 10 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -6.00033, 0.671517, -13.3419 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69126, 1.99232, 0 )
+stream = ExtResource( 13 )
+unit_db = 64.33
+autoplay = true
+script = ExtResource( 12 )
+[connection signal="body_entered" from="Door/Area" to="." method="_on_Area_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer3D" to="AudioStreamPlayer3D" method="_on_AudioStreamPlayer3D_finished"]

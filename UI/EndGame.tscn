@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/EndGame.gd" type="Script" id=1]
+
+[node name="EndGame" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.39648
+margin_top = 0.865082
+margin_right = 1.39648
+margin_bottom = 0.865112
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 151.142
+margin_top = 22.6646
+margin_right = 396.142
+margin_bottom = 130.665
+rect_scale = Vector2( 3, 3 )
+text = "You win! Congratulations!
+Thanks for playing!!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayAgain" type="Button" parent="."]
+margin_left = 357.454
+margin_top = 304.584
+margin_right = 453.454
+margin_bottom = 338.584
+rect_scale = Vector2( 3, 3 )
+text = "Play Again"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 402.708
+margin_top = 468.182
+margin_right = 500.708
+margin_bottom = 508.182
+rect_scale = Vector2( 2, 2 )
+text = "Quit"
+[connection signal="pressed" from="PlayAgain" to="." method="_on_PlayAgain_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

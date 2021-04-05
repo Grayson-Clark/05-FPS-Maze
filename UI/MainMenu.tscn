@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/MainMenu.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 306.464
+margin_top = 193.758
+margin_right = 509.464
+margin_bottom = 254.758
+rect_scale = Vector2( 2, 2 )
+text = "Grayson's FPS Maze"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="."]
+margin_left = 398.358
+margin_top = 343.117
+margin_right = 629.358
+margin_bottom = 399.117
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Button" parent="."]
+margin_left = 398.358
+margin_top = 429.532
+margin_right = 629.358
+margin_bottom = 485.532
+text = "Controls"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 400.358
+margin_top = 515.532
+margin_right = 631.358
+margin_bottom = 571.532
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Controls" to="." method="_on_Controls_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
